@@ -104,29 +104,22 @@ void main(void)
         if(keyCode == 'A')
         {
             TR1 = 1;        //start timer1
-            while(keyReleaseConfirmed == 0);
-
-            keyPushConfirmed = 0;       //reset keypad values
-            keyReleaseConfirmed = 0;
         }
         else if(keyCode == 'B')
         {
             TR1 = 0;        //stop timer1
-            while(keyReleaseConfirmed == 0);
-
-            keyPushConfirmed = 0;       //reset keypad values
-            keyReleaseConfirmed = 0;
         }
         else if(keyCode == 'C')
         {
             TR1 = 0;        //stop timer1
             resetTimer1();
             resetToZero();  //reset display to 0000
-            while(keyReleaseConfirmed == 0);
-
-            keyPushConfirmed = 0;       //reset keypad values
-            keyReleaseConfirmed = 0;
         }
+
+		while(keyReleaseConfirmed == 0);
+
+        keyPushConfirmed = 0;       //reset keypad values
+        keyReleaseConfirmed = 0;
     }
 }
 
