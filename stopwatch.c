@@ -116,7 +116,7 @@ void main(void)
             resetToZero();  //reset display to 0000
         }
 
-		while(keyReleaseConfirmed == 0);
+        while(keyReleaseConfirmed == 0);
 
         keyPushConfirmed = 0;       //reset keypad values
         keyReleaseConfirmed = 0;
