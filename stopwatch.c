@@ -112,6 +112,7 @@ void main(void)
         else if(keyCode == 'C')
         {
             TR1 = 0;        //stop timer1
+			y = 0;			//reset count of timer 1 overflow iterations
             resetTimer1();
             resetToZero();  //reset display to 0000
         }
