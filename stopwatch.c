@@ -129,7 +129,8 @@ void main(void)
  * Function: init
  * -----------------
  *
- * Initializes variables, configures timer mode, and sets input pins for keypad
+ * Initializes variables, configures timer mode, sets input pins for keypad,
+ *  and gives priority to timer for timing accuracy
  *
  */
 
@@ -141,7 +142,8 @@ void init(void)
     pushDetectedCount = 33;
     pushReleasedCount = 32;
 
-    TMOD = 0x11;    //use Timer 0 in 16-bit Timer operating mode and Timer 1 in 16-bit Timer operating mode 
+    TMOD = 0x11;    //use Timer 0 in 16-bit Timer operating mode and Timer 1 in 16-bit Timer operating mode
+    PT1 = 1;        //give priority to timer 1, since this timer is responsible for accurate timing 
     
     krl1 = inputColumn[0];
     krl2 = inputColumn[1];
@@ -221,8 +223,8 @@ void resetTimer0(void)
 void resetTimer1(void)
 {
     TH1 = 0x4C;
-    TL1 = 0x26;         //set to 50 milliseconds  
-}                       // <----- 38 machine cycles from interrupt vector to this line 
+    TL1 = 0x24;         //set to 50 milliseconds  
+}                       // <----- 36 machine cycles from interrupt vector to this line 
 
 
 /* -----------------
