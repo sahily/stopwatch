@@ -23,6 +23,11 @@ void incrementHundreds(void);
 void incrementThousands(void);
 void resetToZero(void);
 void buzzer(void);
+void waitForKeyPush(void);
+void waitForKeyRelease(void);
+void startTiming(void);
+void stopTiming(void);
+void resetTiming(void);
 
 #define TRIGGER 20          //the number of timer overflow iterations before incrementing count
 
@@ -85,7 +90,8 @@ bit keyPushConfirmed;           //set when it is determined key has been pushed
 bit keyReleaseConfirmed;        //set when it is determined key has been released
 unsigned int pushDetectedCount; //used to determine whether key is pushed after a push was detected
 unsigned int pushReleasedCount; //used to determine whether key is released after a push was confirmed
-unsigned char keyCode;          //the value of the key that was detected
+unsigned char keyCode;          //the value of the key that was detected in keypad scanner
+unsigned char keyPushed;        //the value of the key that was pushed
 
 
 
@@ -99,28 +105,20 @@ void main(void)
 
     while(1)
     {
-        while(keyPushConfirmed == 0);
-        keyCode = asciiTab[keyCode];
-        if(keyCode == 'A')
+        waitForKeyPush();
+        if(keyPushed == 'A')
         {
-            TR1 = 1;        //start timer1
+            startTiming();
         }
-        else if(keyCode == 'B')
+        else if(keyPushed == 'B')
         {
-            TR1 = 0;        //stop timer1
+            stopTiming();
         }
-        else if(keyCode == 'C')
+        else if(keyPushed == 'C')
         {
-            TR1 = 0;        //stop timer1
-            y = 0;          //reset count of timer 1 overflow iterations
-            resetTimer1();
-            resetToZero();  //reset display to 0000
+            resetTiming();
         }
-
-        while(keyReleaseConfirmed == 0);
-
-        keyPushConfirmed = 0;       //reset keypad values
-        keyReleaseConfirmed = 0;
+        waitForKeyRelease();
     }
 }
 
@@ -430,6 +428,83 @@ void buzzer(void)
     {
         buzz = ~buzz;
     }
+}
+
+
+/* -----------------
+ * Function: waitForKeyPush
+ * -----------------
+ *
+ * waits for a key to be pushed, and saves the key value when a key is pushed
+ *
+ */
+
+void waitForKeyPush(void)
+{
+    while(keyPushConfirmed == 0);
+    keyPushed = asciiTab[keyCode];
+}
+
+
+/* -----------------
+ * Function: waitForKeyRelease
+ * -----------------
+ *
+ * waits for a key to be released, and resets keypad variables when a key is released
+ *
+ */
+
+void waitForKeyRelease(void)
+{
+    while(keyReleaseConfirmed == 0);
+
+    keyPushConfirmed = 0;       
+    keyReleaseConfirmed = 0;
+}
+
+
+/* -----------------
+ * Function: startTiming
+ * -----------------
+ *
+ * Starts count of stopwatch
+ *
+ */
+
+void startTiming(void)
+{
+    TR1 = 1;        //start timer1
+}
+
+
+/* -----------------
+ * Function: stopTiming
+ * -----------------
+ *
+ * Stops count of stopwatch
+ *
+ */
+
+void stopTiming(void)
+{
+    TR1 = 0;        //stop timer1
+}
+
+
+/* -----------------
+ * Function: resetTiming
+ * -----------------
+ *
+ * Resets count of stopwatch
+ *
+ */
+
+void resetTiming(void)
+{
+    TR1 = 0;        //stop timer1
+    y = 0;          //reset count of timer 1 overflow iterations
+    resetTimer1();
+    resetToZero();  //reset display to 0000
 }
 
 
