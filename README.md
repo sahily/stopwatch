@@ -26,7 +26,7 @@ Stopwatch using keypad and counter
 
 ### Example
 
-Pushing hex A on the keypad, count starts incrementing. Pushing hex B, count pauses. Pushing hex C stops and resets the count.
+Pushing "A","B", and "C" on keypad starts, stops, and resets the time on the display, respectively.
 Current count shown is 0293.
 
 <img src="stopwatch_pic.jpg" width="400">
