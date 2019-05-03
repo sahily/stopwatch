@@ -14,9 +14,9 @@ Stopwatch using keypad and counter
 
 ### Installing
 1. Connect 7-segment displays to the 8051 microcontroller as shown in the following diagram:
-   <img src="7seg_interfacing.jpg" width="400">
+   <img src="7seg_interfacing.png" width="800">
 1. Connect hex keypad to the 8051 microcontroller as shown in the following diagram:
-   <img src="keypad_interfacing.jpg" width="400">
+   <img src="keypad_interfacing.png" width="500">
 1. Connect buzzer to P1.5 of the 8051 microcontroller
 1. Open Keil and create new project
    * Choose Philips P89V51RD2 database
