@@ -154,7 +154,7 @@ void init(void)
  * Function: configureTimer0
  * -----------------
  *
- * sets up Timer 0 and enables timer interrupt
+ * sets up Timer 0 and enables timer 0 interrupt
  *
  */
 
